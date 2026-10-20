@@ -2,7 +2,9 @@ from fastapi import FastAPI
 
 
 def get_application() -> FastAPI:
-    _app = FastAPI()
+    _app = FastAPI(
+        title='backend22'
+    )
     return _app
 
 
