@@ -10,6 +10,7 @@ router_users = APIRouter()
 async def create_user(new_user: CreateUserSchema) -> UserBaseSchema:
     """creating users)))))))))))))"""
     logger.info(new_user)
+    print(2222255555)
     # todo save user in db
     return new_user
 
