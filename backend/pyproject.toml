@@ -7,4 +7,5 @@ requires-python = ">=3.13"
 dependencies = [
     "fastapi[all]>=0.156.0",
     "logtail-python>=0.5.3",
+    "sqlalchemy[asyncio]>=2.1.6",
 ]
