@@ -14,6 +14,7 @@ async def create_user(new_user: CreateUserSchema) -> UserBaseSchema:
     # todo save user in db
     return new_user
 
+
 # @router_users.get('/123')
 # def log_test():
 #     """creating users)))))))))))))"""
