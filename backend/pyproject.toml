@@ -10,5 +10,6 @@ dependencies = [
     "fastapi[all]>=0.156.0",
     "logtail-python>=0.5.3",
     "psycopg2-binary>=2.9.13",
+    "pwdlib[argon2]>=0.3.1",
     "sqlalchemy[asyncio]>=2.1.6",
 ]
