@@ -1,6 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import HTTPException, status
 
+from apps.core.security import PasswordHandler
 from apps.users.models import User
 from apps.users.schemas import CreateUserSchema
 from sqlalchemy.exc import IntegrityError
@@ -12,7 +13,7 @@ class UserDBManager:
 
         user = User(
             email=new_user.email.lower(),
-            hashed_password=new_user.password,
+            hashed_password=PasswordHandler.get_password_hash(new_user.password),
             name=new_user.name
         )
         session.add(user)
