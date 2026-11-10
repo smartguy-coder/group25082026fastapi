@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from apps.dependencies.database import get_async_session
 from apps.users.crud import user_manager
-from apps.users.schemas import CreateUserSchema, UserBaseSchema
+from apps.users.schemas import CreateUserSchema, UserBaseSchema, IdSchema
 from utils.bs_logging import logger
 
 router_users = APIRouter()
@@ -24,11 +24,12 @@ async def create_user(
         new_user: CreateUserSchema,
         # five: int = Depends(get_5_and_more)
         session: AsyncSession = Depends(get_async_session)
-) -> UserBaseSchema:
+) -> IdSchema:
     """creating users)))))))))))))"""
     logger.info(new_user)
     # print('result =', five)
     created_user = await user_manager.create_user(new_user, session)
+    # print(created_user.__dict__, 55555555555555555)
     return created_user
 
 
