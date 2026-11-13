@@ -11,6 +11,7 @@ services:
       - .env
     networks:
       - main_network
+      - backend_frontend_network
     ports:
       - "8001:8000"
     command: |
@@ -25,6 +26,8 @@ services:
       context: ./frontend
     container_name: frontend
     restart: always
+    networks:
+      - backend_frontend_network
     volumes:
       - ./frontend/app:/app
     env_file:
@@ -58,4 +61,6 @@ volumes:
 
 networks:
   main_network:
+    driver: bridge
+  backend_frontend_network:
     driver: bridge
