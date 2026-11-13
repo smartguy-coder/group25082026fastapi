@@ -13,7 +13,19 @@
 
 {% include "components/navbar.html" %}
 
+{% if user_msg %}
+<div class="alert alert-success" role="alert">
+  {{ user_msg }}
+</div>
 
+{% elif error_msg %}
+
+  <div class="alert alert-danger" role="alert">
+  {{ error_msg }}
+  </div>
+
+
+{% endif %}
 
 
 {% block content %}
