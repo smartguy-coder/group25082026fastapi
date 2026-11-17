@@ -1,8 +1,10 @@
 from fastapi import APIRouter, status, Depends, Request, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from apps.auth.dependencies import get_current_user
 from apps.dependencies.database import get_async_session
 from apps.users.crud import user_manager
+from apps.users.models import User
 from apps.users.schemas import CreateUserSchema, UserBaseSchema, IdSchema
 from utils.bs_logging import logger
 
@@ -31,6 +33,15 @@ async def create_user(
     created_user = await user_manager.create_user(new_user, session)
     # print(created_user.__dict__, 55555555555555555)
     return created_user
+
+
+@router_users.get('/my-info')
+async def get_user_info(
+    user: User = Depends(get_current_user),
+    session: AsyncSession = Depends(get_async_session)
+) -> UserBaseSchema:
+
+    return user
 
 
 # @router_users.get('/123')
