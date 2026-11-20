@@ -32,5 +32,10 @@ class UserDBManager:
         result = await session.execute(query)
         return result.scalar_one_or_none()
 
+    async def get_user_by_id(self, user_id: int, session: AsyncSession) -> User | None:
+        query = select(User).filter_by(id=user_id)
+        result = await session.execute(query)
+        return result.scalar_one_or_none()
+
 
 user_manager = UserDBManager()

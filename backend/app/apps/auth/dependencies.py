@@ -3,6 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from apps.auth.auth_handler import auth_handler
 from apps.dependencies.database import get_async_session
+from apps.users.crud import user_manager
 from apps.users.models import User
 from fastapi.security import OAuth2PasswordBearer
 
@@ -19,3 +20,10 @@ async def get_current_user(
     if not payload['type'] == 'access_token':
         raise HTTPException(detail='Invalid token type', status_code=status.HTTP_400_BAD_REQUEST)
 
+    user_id = payload['id']
+    user: User | None = await user_manager.get_user_by_id(user_id=user_id, session=session)
+
+    if not user:
+        raise HTTPException(detail='User was not found', status_code=status.HTTP_404_NOT_FOUND)
+
+    return user

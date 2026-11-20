@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pydantic import BaseModel, Field, EmailStr
 
 
@@ -16,3 +18,7 @@ class IdSchema(BaseModel):
 
 class CreateUserSchema(UserPasswordSchema, UserBaseSchema):
     pass
+
+
+class UserInfoSchema(UserBaseSchema):
+    created_at: datetime

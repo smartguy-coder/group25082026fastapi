@@ -5,7 +5,7 @@ from apps.auth.dependencies import get_current_user
 from apps.dependencies.database import get_async_session
 from apps.users.crud import user_manager
 from apps.users.models import User
-from apps.users.schemas import CreateUserSchema, UserBaseSchema, IdSchema
+from apps.users.schemas import CreateUserSchema, UserBaseSchema, IdSchema, UserInfoSchema
 from utils.bs_logging import logger
 
 router_users = APIRouter()
@@ -38,9 +38,7 @@ async def create_user(
 @router_users.get('/my-info')
 async def get_user_info(
     user: User = Depends(get_current_user),
-    session: AsyncSession = Depends(get_async_session)
-) -> UserBaseSchema:
-
+) -> UserInfoSchema:
     return user
 
 
