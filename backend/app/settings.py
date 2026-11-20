@@ -32,11 +32,19 @@ class JWTSettings(BaseSettings):
     JWT_ALGORITHM: str
 
 
+class RedisSettings(BaseSettings):
+    REDIS_USERNAME: str
+    REDIS_PASSWORD: str
+    REDIS_INTERNAL_PORT: int
+    REDIS_HOST: str
+
+
 class Settings(
     CoreSettings,
     BetterStackSettings,
     PostgreSQLSettings,
     JWTSettings,
+    RedisSettings,
 ):
     pass
 
