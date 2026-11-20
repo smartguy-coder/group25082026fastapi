@@ -27,10 +27,16 @@ class PostgreSQLSettings(BaseSettings):
         )
 
 
+class JWTSettings(BaseSettings):
+    JWT_SECRET: str
+    JWT_ALGORITHM: str
+
+
 class Settings(
     CoreSettings,
     BetterStackSettings,
     PostgreSQLSettings,
+    JWTSettings,
 ):
     pass
 
