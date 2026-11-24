@@ -18,7 +18,7 @@
             Dropdown
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">{{ user.name }} моя інформація </a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -34,8 +34,11 @@
         <button class="btn btn-outline-success" type="submit">Пошук</button>
       </form>
 
-
-      <a class="btn btn-primary" href="{{ url_for('register') }}" role="button">Зареєструватися</a>
+      {% if not user %}
+        <a class="btn btn-primary" href="{{ url_for('register') }}" role="button">Зареєструватися</a>
+      {% else %}
+        <a class="btn btn-primary" href="{{ url_for('logout') }}" role="button">{{ user.name }}, розлогуватися</a>
+      {% endif %}
 
     </div>
   </div>

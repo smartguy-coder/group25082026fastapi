@@ -52,7 +52,7 @@ class AuthHandler:
         token_key = f"refresh_tokens:{user_id}"
         stored_refresh = await redis_client.get_cache(token_key)
 
-        if stored_refresh != refresh_token:
+        if stored_refresh.decode() != refresh_token:
             raise HTTPException(detail='Refresh token was used', status_code=status.HTTP_400_BAD_REQUEST)
 
         await redis_client.delete_cache(token_key)
@@ -97,7 +97,7 @@ class AuthHandler:
     async def create_access_token(self, user: User) -> str:
         token = self.create_jwt_token(
             payload={'id': user.id, 'email': user.email, "type": "access_token"},
-            expire_minutes=5
+            expire_minutes=15
         )
         return token
 
