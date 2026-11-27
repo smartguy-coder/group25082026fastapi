@@ -18,7 +18,9 @@
             Dropdown
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% if  user %}
             <li><a class="dropdown-item" href="#">{{ user.name }} моя інформація </a></li>
+            {% endif %}
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -36,6 +38,7 @@
 
       {% if not user %}
         <a class="btn btn-primary" href="{{ url_for('register') }}" role="button">Зареєструватися</a>
+        <a class="btn btn-primary" href="{{ url_for('login') }}" role="button">Залогуватися</a>
       {% else %}
         <a class="btn btn-primary" href="{{ url_for('logout') }}" role="button">{{ user.name }}, розлогуватися</a>
       {% endif %}
