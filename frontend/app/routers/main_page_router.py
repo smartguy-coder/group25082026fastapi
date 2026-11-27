@@ -58,6 +58,38 @@ async def register(request: Request, email: str = Form(""), name: str = Form("")
         response = templates.TemplateResponse(request=request, name='register.html', context=context, status_code=400)
         return response
 
+
+@router.post("/login")
+async def login_post(request: Request, email: str = Form(), password: str = Form()):
+    login_response = await login_user(email=email, password=password)
+    if login_response.status_code == status.HTTP_200_OK:
+        tokens = login_response.json()
+
+        redirect_response = RedirectResponse(request.url_for("index"), status_code=status.HTTP_303_SEE_OTHER)
+        set_cookies(redirect_response, tokens)
+        return redirect_response
+
+    context = {
+        "page_title": 'login - retry',
+        'error_msg': "Щось не так",
+        'email': email
+    }
+
+    response = templates.TemplateResponse(request=request, name='login.html', context=context)
+    return response
+
+
+@router.get("/login")
+async def login(request: Request):
+
+    context = {
+        "page_title": 'login'
+    }
+
+    response = templates.TemplateResponse(request=request, name='login.html', context=context)
+    return response
+
+
 @router.get("/logout")
 async def logout(request: Request):
 
